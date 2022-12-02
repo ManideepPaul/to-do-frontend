@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router"
 import axios from "axios";
 import { useState } from "react";
 
@@ -7,15 +8,20 @@ export default function SignUp() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const router = useRouter()
 
     const createUser = async () => {
         try {
-            const data = {name, email, password}
-            const addUser = await axios.post('http://localhost:4000/createUser', data)  
-            console.log(addUser) 
+            const data = { name, email, password }
+            const addUser = await axios.post('http://localhost:4000/createUser', data)
+            const checkNewUser = addUser.data.success
             setName('')
             setEmail('')
             setPassword('')
+
+            if (checkNewUser) {
+                router.push('/page/login')
+            }
         } catch (error) {
             console.log(error)
         }
@@ -46,16 +52,16 @@ export default function SignUp() {
                     </label>
                     <label htmlFor="email">
                         <p className="font-medium pb-2">Email address</p>
-                        <input id="email" name="email" type="email" className="input input-secondary w-full py-3 rounded-lg px-3 hover:shadow" placeholder="Enter email address" 
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        <input id="email" name="email" type="email" className="input input-secondary w-full py-3 rounded-lg px-3 hover:shadow" placeholder="Enter email address"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </label>
                     <label htmlFor="password">
                         <p className="font-medium pb-2">Password</p>
-                        <input id="password" name="password" type="password" className="input input-secondary w-full py-3 rounded-lg px-3 f hover:shadow" placeholder="Enter your password" 
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        <input id="password" name="password" type="password" className="input input-secondary w-full py-3 rounded-lg px-3 f hover:shadow" placeholder="Enter your password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
                         />
                     </label>
                     {/* <div className="flex flex-row justify-between">
