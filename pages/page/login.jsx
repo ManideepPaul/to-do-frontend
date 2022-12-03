@@ -13,7 +13,8 @@ export default function Login() {
     const userDetail = async () => {
         try {
             const data = { email, password }
-            const user = await axios.post('http://localhost:4000/login', data)
+            const user = await axios.post('http://localhost:4000/login', data, 
+            { withCredentials: true })
             // console.log(user.data)
             const userData = user.data
 
