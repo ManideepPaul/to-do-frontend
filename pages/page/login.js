@@ -1,20 +1,27 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('')
+    const router = useRouter()
 
     const userDetail = async () => {
         try {
             const data = { email, password }
-
             const user = await axios.post('http://localhost:4000/login', data)
-            console.log(user.data)
+            // console.log(user.data)
+            const userData = user.data
+
+            if(userData.success) {
+                router.push('/page/dashboard')
+            }
         } catch (error) {
-            console.log(error)
+            setError(error.response.data.message)
         }
     }
 
@@ -59,6 +66,10 @@ export default function Login() {
                                 <a href="#" className="font-medium text-indigo-600">Forgot Password?</a>
                             </div>
                         </div> */}
+
+                        {/* Error message */}
+                        <span className="ml-1 text-error font-medium">{error}</span>
+
                     <button className="btn btn-secondary w-full py-3 font-medium rounded-lg hover:shadow inline-flex space-x-2 items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
