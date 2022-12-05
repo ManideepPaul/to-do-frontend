@@ -1,17 +1,18 @@
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
 
   const router = useRouter()
+  const [user, setUser] = useState('')
 
-  const getUser = async() => {
+  const getUser = async () => {
 
     try {
       const user = await axios.get('http://localhost:4000/findUser',
-      { withCredentials: true })
-      router.push('/page/dashboard')
+        { withCredentials: true })
+      setUser(user)
     } catch (error) {
       router.push('/page/login')
       console.log(error)
@@ -21,5 +22,11 @@ export default function Home() {
   useEffect(() => {
     getUser()
   }, [])
+
+  if (user) {
+    return (
+      <h1>Welcome to dashboard</h1>
+    )
+  }
 
 }
