@@ -19,7 +19,7 @@ export default function Login() {
             const userData = user.data
 
             if(userData.success) {
-                router.push('/page/dashboard')
+                router.push('/')
             }
         } catch (error) {
             setError(error.response.data.message)
