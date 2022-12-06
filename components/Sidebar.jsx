@@ -8,7 +8,7 @@ export default function Sidebar(props) {
   const { user, logout, addTitle, deleteTitle, editTitle } = props;
   const [title, setTitle] = useState("");
   const [bubbleId, setBubbleId] = useState("");
-  const [editVal, setEditVal] = useState(undefined);
+  const [editVal, setEditVal] = useState("");
 
   return (
     <>

@@ -41,16 +41,18 @@ export default function Home() {
 
   // Add Title
   const addTitle = async (title, setTitle) => {
-    try {
-      const resp = await axios.put(
-        `http://localhost:4000/addTitle/${user._id}`,
-        { title }
-      );
+    if (title) {
+      try {
+        const resp = await axios.put(
+          `http://localhost:4000/addTitle/${user._id}`,
+          { title }
+        );
 
-      setTitle("");
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
+        setTitle("");
+        console.log(resp);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
