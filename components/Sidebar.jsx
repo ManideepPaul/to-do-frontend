@@ -8,11 +8,8 @@ export default function Sidebar(props) {
   const { user, logout, addTitle, deleteTitle, editTitle } = props;
   const [title, setTitle] = useState("");
   const [bubbleId, setBubbleId] = useState("");
-  const [editVal, setEditVal] = useState("")
+  const [editVal, setEditVal] = useState(undefined);
 
-  const chatBubble = (key) => {
-    console.log(key);
-  };
   return (
     <>
       {/* MobMenu  */}
@@ -213,10 +210,15 @@ export default function Sidebar(props) {
                         className="input max-w-xs text-accent w-11/12 mr-2"
                         onChange={(e) => setEditVal(e.target.value)}
                       />
-                      <button className="btn btn-circle btn-outline btn-xs" onClick={() => {
-                        setBubbleId('');
-                        editTitle(ele._id, editVal, setEditVal)
-                      }}>
+                      <button
+                        className="btn btn-circle btn-xs"
+                        onClick={() => {
+                          if (editVal) {
+                            setBubbleId("");
+                            editTitle(ele._id, editVal, setEditVal);
+                          }
+                        }}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           height="24px"

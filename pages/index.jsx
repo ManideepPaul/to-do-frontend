@@ -42,44 +42,51 @@ export default function Home() {
   // Add Title
   const addTitle = async (title, setTitle) => {
     try {
-      const resp = await axios.put(`http://localhost:4000/addTitle/${user._id}`, {title});
+      const resp = await axios.put(
+        `http://localhost:4000/addTitle/${user._id}`,
+        { title }
+      );
 
-      setTitle('')
-      console.log(resp)
+      setTitle("");
+      console.log(resp);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // Delete Title
   const deleteTitle = async (titleId) => {
     try {
-      const resp = await axios.delete(`http://localhost:4000/deleteTitle/${user._id}/${titleId}`)
-      console.log(resp)
-    } catch(error) {
-      console.log(error)
+      const resp = await axios.delete(
+        `http://localhost:4000/deleteTitle/${user._id}/${titleId}`
+      );
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   // Edit Title
   const editTitle = async (titleId, editVal, setEditVal) => {
     try {
-      const resp = await axios.put(`http://localhost:4000/editTitle/${user._id}/${titleId}`, {titleName : editVal})
-      setEditVal('')
-      console.log(resp)
-    } catch(error) {
-      console.log(error)
+      const resp = await axios.put(
+        `http://localhost:4000/editTitle/${user._id}/${titleId}`,
+        { titleName: editVal }
+      );
+      setEditVal("");
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
     }
-  }
-
+  };
 
   let SidebarProps = {
     user,
     logout,
     addTitle,
     deleteTitle,
-    editTitle
-  }
+    editTitle,
+  };
 
   useEffect(() => {
     getUser();
