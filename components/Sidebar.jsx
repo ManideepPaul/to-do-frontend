@@ -2,7 +2,7 @@ import { useState } from "react";
 
 
 export default function Sidebar(props) {
-  const { handleDefault, user, logout, addTitle } = props;
+  const { handleDefault, user, logout, addTitle, deleteTitle } = props;
   const [ title, setTitle] = useState('');
 
   return (
@@ -93,7 +93,7 @@ export default function Sidebar(props) {
               value={title}
               onChange={e => setTitle(e.target.value)}
             />
-            <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block" onClick={() => addTitle(title, user._id, setTitle)}>
+            <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block" onClick={() => addTitle(title, setTitle)}>
               <svg
                 className="w-6 h-5 fill-current"
                 fill="currentColor"
@@ -156,7 +156,7 @@ export default function Sidebar(props) {
                             <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
                           </svg>
                         </button>
-                        <button className="btn btn-sm btn-square btn-error">
+                        <button className="btn btn-sm btn-square btn-error" id="delete" onClick={() => deleteTitle(ele._id)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

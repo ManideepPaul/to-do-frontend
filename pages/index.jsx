@@ -40,9 +40,9 @@ export default function Home() {
   };
 
   // Add Title
-  const addTitle = async (title, id, setTitle) => {
+  const addTitle = async (title, setTitle) => {
     try {
-      const resp = await axios.put(`http://localhost:4000/addTitle/${id}`, {title});
+      const resp = await axios.put(`http://localhost:4000/addTitle/${user._id}`, {title});
 
       setTitle('')
       console.log(resp)
@@ -51,9 +51,27 @@ export default function Home() {
     }
   }
 
+  // Delete Title
+  const deleteTitle = async (titleId) => {
+    try {
+      const resp = await axios.delete(`http://localhost:4000/deleteTitle/${user._id}/${titleId}`)
+      console.log(resp)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
   const handleDefault = (e) => {
     e.preventDefault();
   };
+
+  let SidebarProps = {
+    user,
+    handleDefault,
+    logout,
+    addTitle,
+    deleteTitle
+  }
 
   useEffect(() => {
     getUser();
@@ -62,7 +80,7 @@ export default function Home() {
   if (user) {
     return (
       <div className="h-full w-screen flex flex-col  md:flex-row">
-        <Sidebar handleDefault={handleDefault} user={user} logout={logout} addTitle={addTitle} />
+        <Sidebar {...SidebarProps} />
         <Tasks />
       </div>
     );
