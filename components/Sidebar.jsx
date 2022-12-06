@@ -1,10 +1,18 @@
 import { useState } from "react";
 
-
 export default function Sidebar(props) {
-  const { handleDefault, user, logout, addTitle, deleteTitle } = props;
-  const [ title, setTitle] = useState('');
+  const handleDefault = (e) => {
+    e.preventDefault();
+  };
 
+  const { user, logout, addTitle, deleteTitle, editTitle } = props;
+  const [title, setTitle] = useState("");
+  const [bubbleId, setBubbleId] = useState("");
+  const [editVal, setEditVal] = useState("")
+
+  const chatBubble = (key) => {
+    console.log(key);
+  };
   return (
     <>
       {/* MobMenu  */}
@@ -30,7 +38,10 @@ export default function Sidebar(props) {
         x-show="sidenav"
       >
         {/* Logout button */}
-        <button className="btn btn-sm btn-outline btn-error mt-3" onClick={logout}>
+        <button
+          className="btn btn-sm btn-outline btn-error mt-3"
+          onClick={logout}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             enableBackground="new 0 0 24 24"
@@ -91,9 +102,12 @@ export default function Sidebar(props) {
               className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
               placeholder="Add Title"
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
             />
-            <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block" onClick={() => addTitle(title, setTitle)}>
+            <button
+              className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block"
+              onClick={() => addTitle(title, setTitle)}
+            >
               <svg
                 className="w-6 h-5 fill-current"
                 fill="currentColor"
@@ -120,11 +134,11 @@ export default function Sidebar(props) {
             return (
               <div key={ele._id} className="md:mr-0 mr-4 flex flex-col ">
                 <a
-                  href=""
                   className=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
                   onClick={handleDefault}
                 >
                   <span className="">{ele.titleName}</span>
+
                   {/* DropDown */}
                   <div className="dropdown dropdown-hover dropdown-left">
                     <svg
@@ -144,7 +158,15 @@ export default function Sidebar(props) {
                     >
                       {/* Buttons */}
                       <div className="btn-group">
-                        <button className="btn btn-sm btn-square btn-secondary">
+                        <button
+                          className="btn btn-sm btn-square btn-secondary"
+                          id="edit"
+                          onClick={() =>
+                            bubbleId === ele._id
+                              ? setBubbleId("")
+                              : setBubbleId(ele._id)
+                          }
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="24px"
@@ -156,7 +178,11 @@ export default function Sidebar(props) {
                             <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
                           </svg>
                         </button>
-                        <button className="btn btn-sm btn-square btn-error" id="delete" onClick={() => deleteTitle(ele._id)}>
+                        <button
+                          className="btn btn-sm btn-square btn-error"
+                          id="delete"
+                          onClick={() => deleteTitle(ele._id)}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -176,6 +202,37 @@ export default function Sidebar(props) {
                     </ul>
                   </div>
                 </a>
+
+                {/* ChatBubble */}
+                {bubbleId === ele._id ? (
+                  <div className="chat chat-end">
+                    <div className="chat-bubble chat-bubble-secondary flex">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input max-w-xs text-accent w-11/12 mr-2"
+                        onChange={(e) => setEditVal(e.target.value)}
+                      />
+                      <button className="btn btn-circle btn-outline btn-xs" onClick={() => {
+                        setBubbleId('');
+                        editTitle(ele._id, editVal, setEditVal)
+                      }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="24px"
+                          viewBox="0 0 24 24"
+                          width="24px"
+                          fill="currentColor"
+                        >
+                          <path d="M0 0h24v24H0V0z" fill="none" />
+                          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             );
           })}

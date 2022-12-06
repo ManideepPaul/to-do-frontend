@@ -61,16 +61,24 @@ export default function Home() {
     }
   }
 
-  const handleDefault = (e) => {
-    e.preventDefault();
-  };
+  // Edit Title
+  const editTitle = async (titleId, editVal, setEditVal) => {
+    try {
+      const resp = await axios.put(`http://localhost:4000/editTitle/${user._id}/${titleId}`, {titleName : editVal})
+      setEditVal('')
+      console.log(resp)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
 
   let SidebarProps = {
     user,
-    handleDefault,
     logout,
     addTitle,
-    deleteTitle
+    deleteTitle,
+    editTitle
   }
 
   useEffect(() => {
