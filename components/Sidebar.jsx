@@ -1,19 +1,20 @@
 export default function Sidebar(props) {
-  const handleDefault = props.funData;
+  const { handleDefault, user } = props;
+  console.log(user.title[0].titleName);
   return (
     <>
       {/* MobMenu  */}
-      <button class="p-3 hover:bg-primary focus:bg-primary-focus transition duration-250 ease-in-out rounded-md shadow-lg   focus:outline-none absolute top-0 left-0 sm:hidden">
+      <button className="p-3 hover:bg-primary focus:bg-primary-focus transition duration-250 ease-in-out rounded-md shadow-lg   focus:outline-none absolute top-0 left-0 sm:hidden">
         <svg
-          class="w-6 h-6"
+          className="w-6 h-6"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           ></path>
         </svg>
       </button>
@@ -21,15 +22,14 @@ export default function Sidebar(props) {
       {/* SideMenu */}
       <div
         id="sidebar"
-        class=" pb-4 bg-base-300 md:h-screen md:block shadow-xl px-3 w-30 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
+        className=" pb-4 bg-base-300 md:h-screen md:block shadow-xl px-3 w-30 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
         x-show="sidenav"
       >
-
         {/* Logout button */}
         <button className="btn btn-sm btn-outline btn-error mt-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            enable-background="new 0 0 24 24"
+            enableBackground="new 0 0 24 24"
             height="20px"
             viewBox="0 0 24 24"
             width="20px"
@@ -47,18 +47,18 @@ export default function Sidebar(props) {
           </svg>
         </button>
 
-        <div class="space-y-6 md:space-y-10 mt-10">
+        <div className="space-y-6 md:space-y-5 mt-10">
           {/* Logo */}
-          <h1 class="hidden md:block font-bold text-sm md:text-xl text-center">
-            Dashwind<span class="">.</span>
+          <h1 className="hidden md:block font-bold text-sm md:text-xl text-center">
+            Dashwind<span className="">.</span>
           </h1>
 
           {/* Profile Image and Name */}
-          <div id="profile" class="space-y-3">
+          <div id="profile" className="space-y-3">
             {/* <img
               src="https://pbs.twimg.com/profile_images/1467997254929854470/mDYbXoVl_400x400.jpg"
               alt="Avatar user"
-              class="w-10 md:w-16 rounded-full mx-auto"
+              className="w-10 md:w-16 rounded-full mx-auto"
             /> */}
 
             {/* FaceSVG */}
@@ -74,22 +74,22 @@ export default function Sidebar(props) {
 
             {/* UserName */}
             <div>
-              <h2 class="font-medium text-sm md:text-base text-center text-accent-focus">
+              <h2 className="font-medium text-sm md:text-base text-center text-accent-focus">
                 Eduard Pantazi
               </h2>
             </div>
           </div>
 
           {/* Add Title */}
-          <div class="flex border-2 rounded-md focus-within:ring-2 mr-4 md:mx-2">
+          <div className="flex border-2 rounded-md focus-within:ring-2 mr-4 md:mx-2">
             <input
               type="text"
-              class="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
+              className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
               placeholder="Add Title"
             />
-            <button class=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block">
+            <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block">
               <svg
-                class="w-6 h-5 fill-current"
+                className="w-6 h-5 fill-current"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,75 +107,72 @@ export default function Sidebar(props) {
             </button>
           </div>
 
-          {/* Title */}
-          <div id="menu" class="md:mr-0 mr-4 flex flex-col space-y-2">
-            <a
-              href=""
-              class=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
-              onClick={handleDefault}
-            >
-              {/* <svg
-                  class="w-6 h-6 fill-current inline-block pb-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+          {user.title.map((ele) => {
+            {
+              /* Title */
+            }
+            return (
+              <div className="md:mr-0 mr-4 flex flex-col ">
+                <a
+                  href=""
+                  className=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
+                  onClick={handleDefault}
                 >
-                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                </svg> */}
-              <span class="">Dashboard</span>
-
-              {/* DropDown */}
-              <div className="dropdown dropdown-end">
-                <svg
-                  tabIndex={0}
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24px"
-                  viewBox="0 0 24 24"
-                  width="24px"
-                  fill="currentColor"
-                >
-                  <path d="M0 0h24v24H0V0z" fill="none" />
-                  <path d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z" />
-                </svg>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-auto"
-                >
-                  {/* Buttons */}
-                  <div className="btn-group">
-                    <button className="btn btn-sm btn-square btn-secondary">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 0 24 24"
-                        width="20px"
-                        fill="currentColor"
-                      >
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
-                      </svg>
-                    </button>
-                    <button className="btn btn-sm btn-square btn-error">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        class="w-4 h-4 hover:cursor-pointer"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                        />
-                      </svg>
-                    </button>
+                  <span className="">{ele.titleName}</span>
+                  {/* DropDown */}
+                  <div className="dropdown dropdown-hover dropdown-left">
+                    <svg
+                      tabIndex={0}
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      width="24px"
+                      fill="currentColor"
+                    >
+                      <path d="M0 0h24v24H0V0z" fill="none" />
+                      <path d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z" />
+                    </svg>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-auto"
+                    >
+                      {/* Buttons */}
+                      <div className="btn-group">
+                        <button className="btn btn-sm btn-square btn-secondary">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24px"
+                            viewBox="0 0 24 24"
+                            width="20px"
+                            fill="currentColor"
+                          >
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
+                          </svg>
+                        </button>
+                        <button className="btn btn-sm btn-square btn-error">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="2"
+                            stroke="currentColor"
+                            className="w-4 h-4 hover:cursor-pointer"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </ul>
                   </div>
-                </ul>
+                </a>
               </div>
-            </a>
-          </div>
+            );
+          })}
         </div>
       </div>
     </>
