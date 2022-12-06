@@ -1,6 +1,9 @@
+import { useState } from "react";
+
 
 export default function Sidebar(props) {
-  const { handleDefault, user, logout } = props;
+  const { handleDefault, user, logout, addTitle } = props;
+  const [ title, setTitle] = useState('');
 
   return (
     <>
@@ -87,8 +90,10 @@ export default function Sidebar(props) {
               type="text"
               className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
               placeholder="Add Title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
             />
-            <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block">
+            <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block" onClick={() => addTitle(title, user._id, setTitle)}>
               <svg
                 className="w-6 h-5 fill-current"
                 fill="currentColor"
