@@ -1,6 +1,7 @@
+
 export default function Sidebar(props) {
-  const { handleDefault, user } = props;
-  console.log(user.title[0].titleName);
+  const { handleDefault, user, logout } = props;
+
   return (
     <>
       {/* MobMenu  */}
@@ -26,7 +27,7 @@ export default function Sidebar(props) {
         x-show="sidenav"
       >
         {/* Logout button */}
-        <button className="btn btn-sm btn-outline btn-error mt-3">
+        <button className="btn btn-sm btn-outline btn-error mt-3" onClick={logout}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             enableBackground="new 0 0 24 24"
@@ -75,7 +76,7 @@ export default function Sidebar(props) {
             {/* UserName */}
             <div>
               <h2 className="font-medium text-sm md:text-base text-center text-accent-focus">
-                Eduard Pantazi
+                {user.name}
               </h2>
             </div>
           </div>
@@ -112,7 +113,7 @@ export default function Sidebar(props) {
               /* Title */
             }
             return (
-              <div className="md:mr-0 mr-4 flex flex-col ">
+              <div key={ele._id} className="md:mr-0 mr-4 flex flex-col ">
                 <a
                   href=""
                   className=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
