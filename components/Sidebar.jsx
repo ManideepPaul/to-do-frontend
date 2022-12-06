@@ -17,12 +17,36 @@ export default function Sidebar(props) {
           ></path>
         </svg>
       </button>
-      
+
+      {/* SideMenu */}
       <div
         id="sidebar"
         class=" pb-4 bg-base-300 md:h-screen md:block shadow-xl px-3 w-30 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
         x-show="sidenav"
       >
+
+        {/* Logout button */}
+        <button className="btn btn-sm btn-outline btn-error mt-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            enable-background="new 0 0 24 24"
+            height="20px"
+            viewBox="0 0 24 24"
+            width="20px"
+            fill="currentColor"
+          >
+            <g>
+              <path d="M0,0h24v24H0V0z" fill="none" />
+            </g>
+            <g>
+              <g>
+                <path d="M5,5h6c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h6c0.55,0,1-0.45,1-1v0 c0-0.55-0.45-1-1-1H5V5z" />
+                <path d="M20.65,11.65l-2.79-2.79C17.54,8.54,17,8.76,17,9.21V11h-7c-0.55,0-1,0.45-1,1v0c0,0.55,0.45,1,1,1h7v1.79 c0,0.45,0.54,0.67,0.85,0.35l2.79-2.79C20.84,12.16,20.84,11.84,20.65,11.65z" />
+              </g>
+            </g>
+          </svg>
+        </button>
+
         <div class="space-y-6 md:space-y-10 mt-10">
           {/* Logo */}
           <h1 class="hidden md:block font-bold text-sm md:text-xl text-center">
@@ -38,9 +62,17 @@ export default function Sidebar(props) {
             /> */}
 
             {/* FaceSVG */}
-            <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" height="48" width="48" fill="currentColor">
+            <svg
+              className="mx-auto"
+              xmlns="http://www.w3.org/2000/svg"
+              height="48"
+              width="48"
+              fill="currentColor"
+            >
               <path d="M17.8 28.9q-1.15 0-1.95-.8t-.8-1.95q0-1.2.8-1.975.8-.775 1.95-.775 1.2 0 1.975.8.775.8.775 1.95 0 1.2-.8 1.975-.8.775-1.95.775Zm12.45 0q-1.2 0-1.975-.8-.775-.8-.775-1.95 0-1.2.8-1.975.8-.775 1.95-.775t1.95.8q.8.8.8 1.95 0 1.2-.8 1.975-.8.775-1.95.775ZM24 40.75q7 0 11.875-4.875T40.75 24q0-1.3-.2-2.5t-.5-2.25q-1 .3-2.125.375-1.125.075-2.375.075-4.8 0-9.05-1.95-4.25-1.95-7.3-5.6-1.65 3.95-4.775 6.925Q11.3 22.05 7.3 23.7v.35q0 7 4.85 11.85T24 40.75Zm0 3.95q-4.25 0-8.025-1.625-3.775-1.625-6.6-4.425-2.825-2.8-4.45-6.575Q3.3 28.3 3.3 24q0-4.3 1.625-8.075Q6.55 12.15 9.375 9.35q2.825-2.8 6.6-4.45 3.775-1.65 8.075-1.65 4.3 0 8.05 1.65 3.75 1.65 6.55 4.45 2.8 2.8 4.45 6.575Q44.75 19.7 44.75 24q0 4.3-1.625 8.075-1.625 3.775-4.45 6.575-2.825 2.8-6.6 4.425Q28.3 44.7 24 44.7Z" />
             </svg>
+
+            {/* UserName */}
             <div>
               <h2 class="font-medium text-sm md:text-base text-center text-accent-focus">
                 Eduard Pantazi
@@ -48,33 +80,38 @@ export default function Sidebar(props) {
             </div>
           </div>
 
-          {/* SeaarchBar */}
+          {/* Add Title */}
           <div class="flex border-2 rounded-md focus-within:ring-2 mr-4 md:mx-2">
             <input
               type="text"
-              class="w-full rounded-tl-md rounded-bl-md px-2 py-3 text-sm focus:outline-none"
-              placeholder="Search"
+              class="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
+              placeholder="Add Title"
             />
-            <button class="rounded-tr-md rounded-br-md px-2 py-3 md:block">
+            <button class=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block">
               <svg
-                class="w-4 h-4 fill-current"
+                class="w-6 h-5 fill-current"
                 fill="currentColor"
-                viewBox="0 0 20 20"
+                viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clip-rule="evenodd"
-                ></path>
+                  xmlns="http://www.w3.org/2000/svg"
+                  d="M0 0h24v24H0V0z"
+                  fill="none"
+                />
+                <path
+                  xmlns="http://www.w3.org/2000/svg"
+                  d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                />
               </svg>
             </button>
           </div>
 
+          {/* Title */}
           <div id="menu" class="md:mr-0 mr-4 flex flex-col space-y-2">
             <a
               href=""
-              class="active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
+              class=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
               onClick={handleDefault}
             >
               {/* <svg
@@ -85,7 +122,58 @@ export default function Sidebar(props) {
                 >
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg> */}
-              <span class="ml-4 pt-4">Dashboard</span>
+              <span class="">Dashboard</span>
+
+              {/* DropDown */}
+              <div className="dropdown dropdown-end">
+                <svg
+                  tabIndex={0}
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  fill="currentColor"
+                >
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z" />
+                </svg>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-auto"
+                >
+                  {/* Buttons */}
+                  <div className="btn-group">
+                    <button className="btn btn-sm btn-square btn-secondary">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        width="20px"
+                        fill="currentColor"
+                      >
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
+                      </svg>
+                    </button>
+                    <button className="btn btn-sm btn-square btn-error">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        class="w-4 h-4 hover:cursor-pointer"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </ul>
+              </div>
             </a>
           </div>
         </div>
