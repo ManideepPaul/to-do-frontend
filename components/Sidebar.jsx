@@ -124,12 +124,12 @@ export default function Sidebar(props) {
             </button>
           </div>
 
-          {user.title.map((ele) => {
+          {user.title.map((ele, key) => {
             {
               /* Title */
             }
             return (
-              <div key={ele._id} className="md:mr-0 mr-4 flex flex-col ">
+              <div id={key} className="md:mr-0 mr-4 flex flex-col ">
                 <a
                   className=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
                   onClick={handleDefault}
