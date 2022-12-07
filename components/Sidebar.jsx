@@ -202,8 +202,7 @@ export default function Sidebar(props) {
 
                 {/* ChatBubble */}
                 {bubbleId === ele._id ? (
-                  <div className="chat chat-end">
-                    <div className="chat-bubble chat-bubble-secondary flex">
+                  <div className="chat chat-end items-center">
                       <input
                         type="text"
                         placeholder="Type here"
@@ -211,7 +210,7 @@ export default function Sidebar(props) {
                         onChange={(e) => setEditVal(e.target.value)}
                       />
                       <button
-                        className="btn btn-circle btn-xs"
+                        className="btn btn-circle btn-primary btn-xs"
                         onClick={() => {
                           if (editVal) {
                             setBubbleId("");
@@ -230,7 +229,6 @@ export default function Sidebar(props) {
                           <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
                         </svg>
                       </button>
-                    </div>
                   </div>
                 ) : (
                   ""
