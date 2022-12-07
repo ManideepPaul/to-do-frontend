@@ -1,4 +1,9 @@
-const Tasks = () => {
+const Tasks = (props) => {
+  const { tasks } = props;
+
+  const show = () => {
+    console.log(tasks);
+  };
   return (
     <div className="w-full sm:w-3/4 my-10 p-8 rounded-xl mx-auto">
       {/* Heading and SeaarchBar */}
@@ -33,9 +38,11 @@ const Tasks = () => {
       </div>
 
       {/* SubHeading */}
-      <p className="hidden md:block text-slate-500">Hello, here are your latest tasks</p>
+      <p className="hidden md:block text-slate-500">
+        Hello, here are your latest tasks
+      </p>
 
-        {/* Add Task Modal */}
+      {/* Add Task Modal */}
       <div className="mt-5">
         {/* Modal Button */}
         <label htmlFor="my-modal-3" className="btn">
@@ -82,99 +89,101 @@ const Tasks = () => {
         </div>
       </div>
 
-        {/* Task */}
-      <div id="tasks" className="my-5">
-        <div
-          id="task"
-          className="flex justify-between flex-wrap items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-primary-focus transition ease-linear duration-150"
-        >
-          {/* Checkbox and Task */}
-          <div className="inline-flex items-center space-x-2">
-            {/* Checkbox */}
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <input type="checkbox" className="checkbox checkbox-accent" />
-              </label>
-            </div>
+      {tasks
+        ? tasks.map((task, key) => {
+            return (
+              <div className="my-5" key={key}>
+                <div className="flex justify-between flex-wrap items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-primary-focus transition ease-linear duration-150">
+                  {/* Checkbox and Task */}
+                  <div className="inline-flex items-center space-x-2">
+                    {/* Checkbox */}
+                    <div className="form-control">
+                      <label className="cursor-pointer label">
+                        <input
+                          type="checkbox"
+                          className="checkbox checkbox-accent"
+                        />
+                      </label>
+                    </div>
 
-            {/* Task */}
-            <div>Magic stuff</div>
-          </div>
+                    {/* Task */}
+                    <div>{task}</div>
+                  </div>
 
-            {/* Edit input and buttons */}
-          <div className="flex flex-wrap justify-center">
-             {/* ChatBubble */}
-          {true ? (
-                  <div className="chat chat-end items-center mr-5">
-                      <input
-                        type="text"
-                        placeholder="Type here"
-                        className="input max-w-xs text-accent w-11/12 mr-2"
-                        onChange={(e) => setEditVal(e.target.value)}
-                      />
-                      <button
-                        className="btn btn-circle btn-primary btn-xs"
-                        onClick={() => {
-                          if (editVal) {
-                            setBubbleId("");
-                            editTitle(ele._id, editVal, setEditVal);
-                          }
-                        }}
-                      >
+                  {/* Edit input and buttons */}
+                  <div className="flex flex-wrap justify-center">
+                    {/* ChatBubble */}
+                    {true ? (
+                      <div className="chat chat-end items-center mr-5">
+                        <input
+                          type="text"
+                          placeholder="Type here"
+                          className="input max-w-xs text-accent w-11/12 mr-2"
+                          onChange={(e) => setEditVal(e.target.value)}
+                        />
+                        <button
+                          className="btn btn-circle btn-primary btn-xs"
+                          onClick={() => {
+                            if (editVal) {
+                              setBubbleId("");
+                              editTitle(ele._id, editVal, setEditVal);
+                            }
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24px"
+                            viewBox="0 0 24 24"
+                            width="24px"
+                            fill="currentColor"
+                          >
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                          </svg>
+                        </button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+
+                    {/* Buttons */}
+                    <div className="btn-group">
+                      <button className="btn btn-square btn-secondary">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           height="24px"
                           viewBox="0 0 24 24"
-                          width="24px"
+                          width="20px"
                           fill="currentColor"
                         >
                           <path d="M0 0h24v24H0V0z" fill="none" />
-                          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                          <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
                         </svg>
                       </button>
+                      <button className="btn btn-square btn-error">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="2"
+                          stroke="currentColor"
+                          className="w-4 h-4 hover:cursor-pointer"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
-                ) : (
-                  ""
-                )}
+                </div>
+              </div>
+            );
+          })
+        : ""}
 
-          {/* Buttons */}
-          <div className="btn-group">
-            <button className="btn btn-square btn-secondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 0 24 24"
-                width="20px"
-                fill="currentColor"
-              >
-                <path d="M0 0h24v24H0V0z" fill="none" />
-                <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
-              </svg>
-            </button>
-            <button className="btn btn-square btn-error">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                className="w-4 h-4 hover:cursor-pointer"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                />
-              </svg>
-            </button>
-          </div>
-          </div>
-
-         
-        </div>
-
-        
-      </div>
       <p className="text-xs text-slate-500 text-center">
         Last updated 12 minutes ago
       </p>

@@ -7,6 +7,7 @@ import Tasks from "../components/Tasks";
 export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState("");
+  const [tasks, setTasks] = useState("");
 
   // Get User
   const getUser = async () => {
@@ -82,12 +83,27 @@ export default function Home() {
     }
   };
 
-  let SidebarProps = {
+  // Get tasks
+  const getTasks = (title_id) => {
+    const title = user.title.find((item) => item._id === title_id);
+    if (title.tasks.length === 0) {
+      setTasks("");
+    } else{
+      setTasks(title.tasks);
+    }
+  };
+
+  const SidebarProps = {
     user,
     logout,
     addTitle,
     deleteTitle,
     editTitle,
+    getTasks,
+  };
+
+  const TasksProps = {
+    tasks,
   };
 
   useEffect(() => {
@@ -98,7 +114,7 @@ export default function Home() {
     return (
       <div className="h-full w-screen flex flex-col  md:flex-row">
         <Sidebar {...SidebarProps} />
-        <Tasks />
+        <Tasks {...TasksProps} />
       </div>
     );
   }

@@ -5,7 +5,7 @@ export default function Sidebar(props) {
     e.preventDefault();
   };
 
-  const { user, logout, addTitle, deleteTitle, editTitle } = props;
+  const { user, logout, addTitle, deleteTitle, editTitle, getTasks } = props;
   const [title, setTitle] = useState("");
   const [bubbleId, setBubbleId] = useState("");
   const [editVal, setEditVal] = useState("");
@@ -129,10 +129,14 @@ export default function Sidebar(props) {
               /* Title */
             }
             return (
-              <div id={key} className="md:mr-0 mr-4 flex flex-col ">
+              <div key={key} className="md:mr-0 mr-4 flex flex-col ">
                 <a
                   className=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
-                  onClick={handleDefault}
+                  onClick={ () => {
+                    handleDefault
+                    getTasks(ele._id)
+                  }
+                  }
                 >
                   <span className="">{ele.titleName}</span>
 
