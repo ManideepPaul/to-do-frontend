@@ -86,7 +86,7 @@ const Tasks = () => {
       <div id="tasks" className="my-5">
         <div
           id="task"
-          className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-primary-focus transition ease-linear duration-150"
+          className="flex justify-between flex-wrap items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-primary-focus transition ease-linear duration-150"
         >
           {/* Checkbox and Task */}
           <div className="inline-flex items-center space-x-2">
@@ -100,6 +100,42 @@ const Tasks = () => {
             {/* Task */}
             <div>Magic stuff</div>
           </div>
+
+            {/* Edit input and buttons */}
+          <div className="flex flex-wrap justify-center">
+             {/* ChatBubble */}
+          {true ? (
+                  <div className="chat chat-end items-center mr-5">
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input max-w-xs text-accent w-11/12 mr-2"
+                        onChange={(e) => setEditVal(e.target.value)}
+                      />
+                      <button
+                        className="btn btn-circle btn-primary btn-xs"
+                        onClick={() => {
+                          if (editVal) {
+                            setBubbleId("");
+                            editTitle(ele._id, editVal, setEditVal);
+                          }
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="24px"
+                          viewBox="0 0 24 24"
+                          width="24px"
+                          fill="currentColor"
+                        >
+                          <path d="M0 0h24v24H0V0z" fill="none" />
+                          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                        </svg>
+                      </button>
+                  </div>
+                ) : (
+                  ""
+                )}
 
           {/* Buttons */}
           <div className="btn-group">
@@ -132,7 +168,12 @@ const Tasks = () => {
               </svg>
             </button>
           </div>
+          </div>
+
+         
         </div>
+
+        
       </div>
       <p className="text-xs text-slate-500 text-center">
         Last updated 12 minutes ago
