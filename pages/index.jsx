@@ -9,6 +9,9 @@ export default function Home() {
   const [user, setUser] = useState("");
   const [title, setTitle] = useState("");
 
+  // This will help me to update the tasks without looping the useEffect hook
+  const [renderTask, setRenderTask] = useState(false)
+
   // Get User
   const getUser = async () => {
     try {
@@ -96,6 +99,9 @@ export default function Home() {
       { task }
     );
     console.log(resp);
+
+    // After updating the renderTask it will trigger the useEffect to update user and task
+    setRenderTask(() => renderTask === true ? false : true)
   };
 
   const SidebarProps = {
@@ -117,7 +123,7 @@ export default function Home() {
 
     // if we call addTask function this will repopulate the component
     if(title) getTasks(title._id)
-  }, [user, addTask]);
+  }, [user, renderTask]);
 
   if (user) {
     return (
