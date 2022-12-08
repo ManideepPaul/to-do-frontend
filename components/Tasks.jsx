@@ -1,9 +1,10 @@
-const Tasks = (props) => {
-  const { tasks } = props;
+import { useState } from "react";
 
-  const show = () => {
-    console.log(tasks);
-  };
+const Tasks = (props) => {
+  const { title, addTask } = props;
+
+  const [task, setTask] = useState("");
+
   return (
     <div className="w-full sm:w-3/4 my-10 p-8 rounded-xl mx-auto">
       {/* Heading and SeaarchBar */}
@@ -59,14 +60,17 @@ const Tasks = (props) => {
             >
               ✕
             </label>
-            {/* Add Title */}
+
+            {/* Add Task */}
             <div className="mx-auto w-80 mt-8 flex border-2 rounded-md focus-within:ring-2 ">
               <input
                 type="text"
                 className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
                 placeholder="Add Task"
+                onChange={(e) => setTask(e.target.value)}
               />
-              <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block">
+              <label htmlFor="my-modal-3" className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block" onClick={() => addTask(title._id, task)}>
+                {/* + svg */}
                 <svg
                   className="w-6 h-5 fill-current"
                   fill="currentColor"
@@ -83,14 +87,14 @@ const Tasks = (props) => {
                     d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
                   />
                 </svg>
-              </button>
+              </label>
             </div>
           </div>
         </div>
       </div>
 
-      {tasks
-        ? tasks.map((task, key) => {
+      {title !== ""
+        ? title.tasks.map((task, key) => {
             return (
               <div className="my-5" key={key}>
                 <div className="flex justify-between flex-wrap items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-primary-focus transition ease-linear duration-150">

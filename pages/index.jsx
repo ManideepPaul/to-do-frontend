@@ -7,7 +7,7 @@ import Tasks from "../components/Tasks";
 export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState("");
-  const [tasks, setTasks] = useState("");
+  const [title, setTitle] = useState("");
 
   // Get User
   const getUser = async () => {
@@ -86,11 +86,16 @@ export default function Home() {
   // Get tasks
   const getTasks = (title_id) => {
     const title = user.title.find((item) => item._id === title_id);
-    if (title.tasks.length === 0) {
-      setTasks("");
-    } else{
-      setTasks(title.tasks);
-    }
+    setTitle(title);
+  };
+
+  // Add Task
+  const addTask = async (titleId, task) => {
+    const resp = await axios.put(
+      `http://localhost:4000/addTask/${user._id}/${titleId}`,
+      { task }
+    );
+    console.log(resp);
   };
 
   const SidebarProps = {
@@ -103,12 +108,16 @@ export default function Home() {
   };
 
   const TasksProps = {
-    tasks,
+    title,
+    addTask,
   };
 
   useEffect(() => {
     getUser();
-  }, [user]);
+
+    // if we call addTask function this will repopulate the component
+    if(title) getTasks(title._id)
+  }, [user, addTask]);
 
   if (user) {
     return (
