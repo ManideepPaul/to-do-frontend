@@ -31,7 +31,7 @@ export default function Sidebar(props) {
       {/* SideMenu */}
       <div
         id="sidebar"
-        className=" pb-4 bg-base-300 md:block shadow-xl px-3 w-30 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
+        className="min-h-screen pb-4 bg-base-300 md:block shadow-xl px-3 w-30 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
         x-show="sidenav"
       >
         {/* Logout button */}
