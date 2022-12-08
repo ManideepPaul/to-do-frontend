@@ -13,7 +13,7 @@ const Tasks = (props) => {
       <div className="flex flex-row justify-between items-center">
         {/* Heading */}
         <div>
-          <h1 className="text-3xl font-medium">Tasks list</h1>
+          <h1 className="text-3xl font-medium">{title.titleName}</h1>
         </div>
 
         {/* SeaarchBar */}
