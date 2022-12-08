@@ -127,7 +127,7 @@ export default function Home() {
 
   if (user) {
     return (
-      <div className="h-full w-screen flex flex-col  md:flex-row">
+      <div className="h-full flex flex-col  md:flex-row">
         <Sidebar {...SidebarProps} />
         <Tasks {...TasksProps} />
       </div>
