@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 const Tasks = (props) => {
-  const { title, addTask, deleteTask } = props;
+  const { title, addTask, deleteTask, editTask } = props;
 
   const [task, setTask] = useState("");
+  const [showInput, setShowInput] = useState("");
+  const [editTaskVal, setEditTaskVal] = useState("")
 
   return (
     <div className="w-full sm:w-3/4 my-10 p-8 rounded-xl mx-auto">
@@ -117,20 +119,20 @@ const Tasks = (props) => {
                   {/* Edit input and buttons */}
                   <div className="flex flex-wrap justify-center">
                     {/* ChatBubble */}
-                    {true ? (
+                    {showInput === key ? (
                       <div className="chat chat-end items-center mr-5">
                         <input
                           type="text"
                           placeholder="Type here"
                           className="input max-w-xs text-accent w-11/12 mr-2"
-                          onChange={(e) => setEditVal(e.target.value)}
+                          onChange={(e) => setEditTaskVal(e.target.value)}
                         />
                         <button
                           className="btn btn-circle btn-primary btn-xs"
                           onClick={() => {
-                            if (editVal) {
-                              setBubbleId("");
-                              editTitle(ele._id, editVal, setEditVal);
+                            if (editTaskVal) {
+                              setShowInput("");
+                              editTask(title._id, key, editTaskVal, setEditTaskVal);
                             }
                           }}
                         >
@@ -152,7 +154,8 @@ const Tasks = (props) => {
 
                     {/* Buttons */}
                     <div className="btn-group">
-                      <button className="btn btn-square btn-secondary">
+                        {/* edit button */}
+                      <button className="btn btn-square btn-secondary" onClick={() => setShowInput(value => value === key ? "" : key)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           height="24px"

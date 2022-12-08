@@ -106,8 +106,23 @@ export default function Home() {
 
   // Delete Task
   const deleteTask = async (titleId, key) => {
-    const resp = await axios.delete(`http://localhost:4000/deleteTask/${user._id}/${titleId}/${key}`);
-    console.log(resp)
+    try{
+      const resp = await axios.delete(`http://localhost:4000/deleteTask/${user._id}/${titleId}/${key}`);
+      console.log(resp)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // Edit task
+  const editTask = async(titleId, key, editTaskVal, setEdittaskVal) => {
+    try {
+      const resp = await axios.put(`http://localhost:4000/editTask/${user._id}/${titleId}/${key}`, {task: editTaskVal})
+      setEdittaskVal("")
+      console.log(resp)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const SidebarProps = {
@@ -122,7 +137,8 @@ export default function Home() {
   const TasksProps = {
     title,
     addTask,
-    deleteTask
+    deleteTask,
+    editTask
   };
 
   useEffect(() => {
