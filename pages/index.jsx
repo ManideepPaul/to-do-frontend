@@ -104,6 +104,12 @@ export default function Home() {
     setRenderTask(() => renderTask === true ? false : true)
   };
 
+  // Delete Task
+  const deleteTask = async (titleId, key) => {
+    const resp = await axios.delete(`http://localhost:4000/deleteTask/${user._id}/${titleId}/${key}`);
+    console.log(resp)
+  }
+
   const SidebarProps = {
     user,
     logout,
@@ -116,6 +122,7 @@ export default function Home() {
   const TasksProps = {
     title,
     addTask,
+    deleteTask
   };
 
   useEffect(() => {
