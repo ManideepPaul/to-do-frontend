@@ -93,12 +93,13 @@ export default function Home() {
   };
 
   // Add Task
-  const addTask = async (titleId, task) => {
+  const addTask = async (titleId, task, setTask) => {
     const resp = await axios.put(
       `http://localhost:4000/addTask/${user._id}/${titleId}`,
       { task }
     );
     console.log(resp);
+    setTask("")
 
     // After updating the renderTask it will trigger the useEffect to update user and task
     setRenderTask(() => renderTask === true ? false : true)

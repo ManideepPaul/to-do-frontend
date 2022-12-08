@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 const Tasks = (props) => {
-  const { title, addTask, deleteTask, editTask } = props;
+  const { title, addTask, deleteTask, editTask} = props;
 
   const [task, setTask] = useState("");
   const [showInput, setShowInput] = useState("");
-  const [editTaskVal, setEditTaskVal] = useState("")
+  const [editTaskVal, setEditTaskVal] = useState("");
 
   return (
     <div className="w-full sm:w-3/4 my-10 p-8 rounded-xl mx-auto">
@@ -69,26 +69,31 @@ const Tasks = (props) => {
                 type="text"
                 className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
                 placeholder="Add Task"
+                value={task}
                 onChange={(e) => setTask(e.target.value)}
               />
-              <label htmlFor="my-modal-3" className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block" onClick={() => addTask(title._id, task)}>
+              <label
+                htmlFor="my-modal-3"
+                className=" mx-auto rounded-tr-md rounded-br-md px-2 pt-3 md:block"
+                onClick={() => addTask(title._id, task, setTask)}
+              >
                 {/* + svg */}
-                <svg
-                  className="w-6 h-5 fill-current"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
+                  <svg
+                    className="w-6 h-5 fill-current"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
-                    d="M0 0h24v24H0V0z"
-                    fill="none"
-                  />
-                  <path
-                    xmlns="http://www.w3.org/2000/svg"
-                    d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-                  />
-                </svg>
+                  >
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M0 0h24v24H0V0z"
+                      fill="none"
+                    />
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                    />
+                  </svg>
               </label>
             </div>
           </div>
@@ -132,7 +137,12 @@ const Tasks = (props) => {
                           onClick={() => {
                             if (editTaskVal) {
                               setShowInput("");
-                              editTask(title._id, key, editTaskVal, setEditTaskVal);
+                              editTask(
+                                title._id,
+                                key,
+                                editTaskVal,
+                                setEditTaskVal
+                              );
                             }
                           }}
                         >
@@ -154,8 +164,13 @@ const Tasks = (props) => {
 
                     {/* Buttons */}
                     <div className="btn-group">
-                        {/* edit button */}
-                      <button className="btn btn-square btn-secondary" onClick={() => setShowInput(value => value === key ? "" : key)}>
+                      {/* edit button */}
+                      <button
+                        className="btn btn-square btn-secondary"
+                        onClick={() =>
+                          setShowInput((value) => (value === key ? "" : key))
+                        }
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           height="24px"
@@ -168,7 +183,10 @@ const Tasks = (props) => {
                         </svg>
                       </button>
                       {/* delete button */}
-                      <button className="btn btn-square btn-error" onClick={() => deleteTask(title._id, key)}>
+                      <button
+                        className="btn btn-square btn-error"
+                        onClick={() => deleteTask(title._id, key)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
