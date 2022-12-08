@@ -31,12 +31,12 @@ export default function Sidebar(props) {
       {/* SideMenu */}
       <div
         id="sidebar"
-        className="min-h-screen pb-4 bg-base-300 md:block shadow-xl px-3 w-30 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
+        className="md:min-h-screen pb-4 bg-base-300 md:block shadow-xl px-3 w-30 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
         x-show="sidenav"
       >
         {/* Logout button */}
         <button
-          className="btn btn-sm btn-outline btn-error mt-3"
+          className="btn btn-sm btn-outline btn-error mt-3 hidden sm:block"
           onClick={logout}
         >
           <svg
@@ -129,84 +129,84 @@ export default function Sidebar(props) {
               /* Title */
             }
             return (
-              <div key={key} className="md:mr-0 mr-4 flex flex-col ">
-                <a
-                  className=" flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
-                  onClick={ () => {
-                    handleDefault
-                    getTasks(ele._id)
-                  }
-                  }
-                >
-                  <span className="">{ele.titleName}</span>
-
+                <div key={key} className="md:mr-0 mr-4 flex flex-wrap">
+                  <a
+                    className="w-11/12 flex flex-row justify-between items-center active:bg-primary-focus focus:bg-primary-focus text-md font-medium py-2 px-2 hover:bg-primary rounded-md transition duration-250 ease-in-out"
+                    onClick={() => {
+                      handleDefault;
+                      getTasks(ele._id);
+                    }}
+                  >
+                    <span className="">{ele.titleName}</span>
+                  </a>
                   {/* DropDown */}
                   <div className="dropdown dropdown-hover dropdown-left">
-                    <svg
-                      tabIndex={0}
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="24px"
-                      viewBox="0 0 24 24"
-                      width="24px"
-                      fill="currentColor"
-                    >
-                      <path d="M0 0h24v24H0V0z" fill="none" />
-                      <path d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z" />
-                    </svg>
-                    <ul
+                      <svg
+                        tabIndex={0}
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        width="24px"
+                        fill="currentColor"
+                      >
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z" />
+                      </svg>
+                      <ul
                       tabIndex={0}
                       className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-auto"
                     >
-                      {/* Buttons */}
-                      <div className="btn-group">
-                        <button
-                          className="btn btn-sm btn-square btn-secondary"
-                          id="edit"
-                          onClick={() =>
-                            bubbleId === ele._id
-                              ? setBubbleId("")
-                              : setBubbleId(ele._id)
-                          }
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            width="20px"
-                            fill="currentColor"
+                      
+                        {/* Buttons */}
+                        <div className="btn-group">
+                          <button
+                            className="btn btn-sm btn-square btn-secondary"
+                            id="edit"
+                            onClick={() =>
+                              bubbleId === ele._id
+                                ? setBubbleId("")
+                                : setBubbleId(ele._id)
+                            }
                           >
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
-                          </svg>
-                        </button>
-                        <button
-                          className="btn btn-sm btn-square btn-error"
-                          id="delete"
-                          onClick={() => deleteTitle(ele._id)}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            className="w-4 h-4 hover:cursor-pointer"
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              height="24px"
+                              viewBox="0 0 24 24"
+                              width="20px"
+                              fill="currentColor"
+                            >
+                              <path d="M0 0h24v24H0V0z" fill="none" />
+                              <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
+                            </svg>
+                          </button>
+                          <button
+                            className="btn btn-sm btn-square btn-error"
+                            id="delete"
+                            onClick={() => deleteTitle(ele._id)}
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    </ul>
-                  </div>
-                </a>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="2"
+                              stroke="currentColor"
+                              className="w-4 h-4 hover:cursor-pointer"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                    
+                      </ul>
+                    </div>
 
-                {/* ChatBubble */}
-                {bubbleId === ele._id ? (
-                  <div className="chat chat-end items-center">
+                  {/* ChatBubble */}
+                  {bubbleId === ele._id ? (
+                    <div className="chat chat-end items-center">
                       <input
                         type="text"
                         placeholder="Type here"
@@ -233,11 +233,11 @@ export default function Sidebar(props) {
                           <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
                         </svg>
                       </button>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
             );
           })}
         </div>
