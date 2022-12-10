@@ -13,7 +13,7 @@ const Tasks = (props) => {
       <div className="flex flex-row justify-between items-center">
         {/* Heading */}
         <div>
-          <h1 className="text-3xl font-medium">{title.titleName}</h1>
+          <h1 className="text-3xl font-medium">{title ? title.titleName : "Select the title for tasks"}</h1>
         </div>
 
         {/* SeaarchBar */}
@@ -100,7 +100,7 @@ const Tasks = (props) => {
         </div>
       </div>
 
-      {title !== ""
+      {title
         ? title.tasks.map((task, key) => {
             return (
               <div className="my-5" key={key}>
