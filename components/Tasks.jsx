@@ -75,7 +75,7 @@ const Tasks = (props) => {
               <label
                 htmlFor="my-modal-3"
                 className=" mx-auto rounded-tr-md rounded-br-md px-2 pt-3 md:block"
-                onClick={() => addTask(title._id, task, setTask)}
+                onClick={() => addTask(task, setTask)}
               >
                 {/* + svg */}
                   <svg
@@ -138,7 +138,6 @@ const Tasks = (props) => {
                             if (editTaskVal) {
                               setShowInput("");
                               editTask(
-                                title._id,
                                 key,
                                 editTaskVal,
                                 setEditTaskVal
@@ -185,7 +184,7 @@ const Tasks = (props) => {
                       {/* delete button */}
                       <button
                         className="btn btn-square btn-error"
-                        onClick={() => deleteTask(title._id, key)}
+                        onClick={() => deleteTask(key)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

@@ -88,16 +88,17 @@ export default function Home() {
   };
 
   // Get tasks
-  const getTasks = (title_id) => {
+  const getTasks = (titleId) => {
+    setCurrTitleId(titleId)
     console.log("running")
-    const title = user.title.find((item) => item._id === title_id);
+    const title = user.title.find((item) => item._id === titleId);
     setTitle(title);
   };
 
   // Add Task
-  const addTask = async (titleId, task, setTask) => {
+  const addTask = async (task, setTask) => {
     const resp = await axios.put(
-      `http://localhost:4000/addTask/${user._id}/${titleId}`,
+      `http://localhost:4000/addTask/${user._id}/${currTitleId}`,
       { task }
     );
     console.log(resp);
@@ -106,9 +107,9 @@ export default function Home() {
   };
 
   // Delete Task
-  const deleteTask = async (titleId, key) => {
+  const deleteTask = async (key) => {
     try{
-      const resp = await axios.delete(`http://localhost:4000/deleteTask/${user._id}/${titleId}/${key}`);
+      const resp = await axios.delete(`http://localhost:4000/deleteTask/${user._id}/${currTitleId}/${key}`);
       console.log(resp)
       setModified(true)
     } catch (error) {
@@ -117,9 +118,9 @@ export default function Home() {
   }
 
   // Edit task
-  const editTask = async(titleId, key, editTaskVal, setEdittaskVal) => {
+  const editTask = async(key, editTaskVal, setEdittaskVal) => {
     try {
-      const resp = await axios.put(`http://localhost:4000/editTask/${user._id}/${titleId}/${key}`, {task: editTaskVal})
+      const resp = await axios.put(`http://localhost:4000/editTask/${user._id}/${currTitleId}/${key}`, {task: editTaskVal})
       setEdittaskVal("")
       console.log(resp)      
       setModified(true)
@@ -141,7 +142,7 @@ export default function Home() {
     title,
     addTask,
     deleteTask,
-    editTask
+    editTask,
   };
 
   useEffect(() => {
