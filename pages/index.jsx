@@ -8,9 +8,10 @@ export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [title, setTitle] = useState("");
+  const [currTitleId, setCurrTitleId] = useState("")
 
-  // This will help me to update the tasks without looping the useEffect hook
-  const [renderTask, setRenderTask] = useState(false)
+  // This will help to rerender the tasks again
+  const [modified, setModified] = useState(false)
 
   // Get User
   const getUser = async () => {
@@ -88,6 +89,7 @@ export default function Home() {
 
   // Get tasks
   const getTasks = (title_id) => {
+    console.log("running")
     const title = user.title.find((item) => item._id === title_id);
     setTitle(title);
   };
@@ -100,9 +102,7 @@ export default function Home() {
     );
     console.log(resp);
     setTask("")
-
-    // After updating the renderTask it will trigger the useEffect to update user and task
-    setRenderTask(() => renderTask === true ? false : true)
+    setModified(true)
   };
 
   // Delete Task
@@ -110,6 +110,7 @@ export default function Home() {
     try{
       const resp = await axios.delete(`http://localhost:4000/deleteTask/${user._id}/${titleId}/${key}`);
       console.log(resp)
+      setModified(true)
     } catch (error) {
       console.log(error)
     }
@@ -120,7 +121,8 @@ export default function Home() {
     try {
       const resp = await axios.put(`http://localhost:4000/editTask/${user._id}/${titleId}/${key}`, {task: editTaskVal})
       setEdittaskVal("")
-      console.log(resp)
+      console.log(resp)      
+      setModified(true)
     } catch (error) {
       console.log(error)
     }
@@ -146,8 +148,11 @@ export default function Home() {
     getUser();
 
     // if we call addTask function this will repopulate the component
-    if(title) getTasks(title._id)
-  }, [user, renderTask]);
+    if(modified) {
+      getTasks(title._id)
+      setModified(false)
+    }
+  }, [user]);
 
   if (user) {
     return (
