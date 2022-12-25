@@ -8,7 +8,8 @@ export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [title, setTitle] = useState("");
-  const [currTitleId, setCurrTitleId] = useState("")
+  const [currTitleId, setCurrTitleId] = useState("");
+  const [allTasks, setAllTasks] = useState([])
 
   // This will help to rerender the tasks again
   const [modified, setModified] = useState(false)
@@ -90,9 +91,16 @@ export default function Home() {
   // Get tasks
   const getTasks = (titleId) => {
     setCurrTitleId(titleId)
+    setAllTasks([])
     console.log("running")
     const title = user.title.find((item) => item._id === titleId);
     setTitle(title);
+    
+    title.tasks.map((item, index) => {
+      setAllTasks(oldArray => [...oldArray, {task: item, index}])
+    })
+
+    console.log(allTasks)
   };
 
   // Add Task
@@ -143,6 +151,7 @@ export default function Home() {
     addTask,
     deleteTask,
     editTask,
+    allTasks
   };
 
   useEffect(() => {

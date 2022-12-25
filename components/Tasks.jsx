@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Tasks = (props) => {
-  const { title, addTask, deleteTask, editTask} = props;
+  const { title, addTask, deleteTask, editTask, allTasks} = props;
 
   const [task, setTask] = useState("");
   const [showInput, setShowInput] = useState("");
@@ -100,8 +100,8 @@ const Tasks = (props) => {
         </div>
       </div>
 
-      {title
-        ? title.tasks.map((task, key) => {
+      {allTasks.length > 0
+        ? allTasks.map((item, key) => {
             return (
               <div className="my-5" key={key}>
                 <div className="flex justify-between flex-wrap items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-primary-focus transition ease-linear duration-150">
@@ -118,7 +118,7 @@ const Tasks = (props) => {
                     </div>
 
                     {/* Task */}
-                    <div>{task}</div>
+                    <div>{item.task}</div>
                   </div>
 
                   {/* Edit input and buttons */}
@@ -138,7 +138,7 @@ const Tasks = (props) => {
                             if (editTaskVal) {
                               setShowInput("");
                               editTask(
-                                key,
+                                item.index,
                                 editTaskVal,
                                 setEditTaskVal
                               );
@@ -184,7 +184,7 @@ const Tasks = (props) => {
                       {/* delete button */}
                       <button
                         className="btn btn-square btn-error"
-                        onClick={() => deleteTask(key)}
+                        onClick={() => deleteTask(item.index)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
