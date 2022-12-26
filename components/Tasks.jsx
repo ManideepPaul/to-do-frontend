@@ -1,7 +1,17 @@
 import { useState } from "react";
 
 const Tasks = (props) => {
-  const { title, addTask, deleteTask, editTask, allTasks} = props;
+  const {
+    title,
+    addTask,
+    deleteTask,
+    editTask,
+    allTasks,
+    searchValue,
+    setSearchValue,
+    getTasks,
+    setSearched,
+  } = props;
 
   const [task, setTask] = useState("");
   const [showInput, setShowInput] = useState("");
@@ -13,17 +23,33 @@ const Tasks = (props) => {
       <div className="flex flex-row justify-between items-center">
         {/* Heading */}
         <div>
-          <h1 className="text-3xl font-medium">{title ? title.titleName : "Select the title for tasks"}</h1>
+          <h1 className="text-3xl font-medium">
+            {title ? title.titleName : "Select the title for tasks"}
+          </h1>
         </div>
 
         {/* SeaarchBar */}
-        <div className="flex border-2 rounded-md focus-within:ring-2 mr-4 md:mx-2">
+        <form className="flex border-2 rounded-md focus-within:ring-2 mr-4 md:mx-2">
           <input
             type="text"
             className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
             placeholder="Search"
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+              setSearched(true);
+            }}
+            value={searchValue}
           />
-          <button className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block">
+          <button
+            className=" mx-auto rounded-tr-md rounded-br-md px-2 py-3 md:block"
+            onClick={(e) => {
+              e.preventDefault();
+              if (searchValue) {
+                getTasks();
+                setSearchValue("");
+              }
+            }}
+          >
             <svg
               className="w-4 h-4 fill-current"
               fill="currentColor"
@@ -37,7 +63,7 @@ const Tasks = (props) => {
               ></path>
             </svg>
           </button>
-        </div>
+        </form>
       </div>
 
       {/* SubHeading */}
@@ -64,7 +90,7 @@ const Tasks = (props) => {
             </label>
 
             {/* Add Task */}
-            <div className="mx-auto w-80 mt-8 flex border-2 rounded-md focus-within:ring-2 ">
+            <form className="mx-auto w-80 mt-8 flex border-2 rounded-md focus-within:ring-2 ">
               <input
                 type="text"
                 className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
@@ -75,9 +101,15 @@ const Tasks = (props) => {
               <label
                 htmlFor="my-modal-3"
                 className=" mx-auto rounded-tr-md rounded-br-md px-2 pt-3 md:block"
-                onClick={() => addTask(task, setTask)}
               >
-                {/* + svg */}
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addTask(task, setTask);
+                  }}
+                  type="submit"
+                >
+                  {/* + svg */}
                   <svg
                     className="w-6 h-5 fill-current"
                     fill="currentColor"
@@ -94,8 +126,9 @@ const Tasks = (props) => {
                       d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
                     />
                   </svg>
+                </button>
               </label>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -137,11 +170,7 @@ const Tasks = (props) => {
                           onClick={() => {
                             if (editTaskVal) {
                               setShowInput("");
-                              editTask(
-                                item.index,
-                                editTaskVal,
-                                setEditTaskVal
-                              );
+                              editTask(item.index, editTaskVal, setEditTaskVal);
                             }
                           }}
                         >

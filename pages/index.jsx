@@ -9,10 +9,12 @@ export default function Home() {
   const [user, setUser] = useState("");
   const [title, setTitle] = useState("");
   const [currTitleId, setCurrTitleId] = useState("");
-  const [allTasks, setAllTasks] = useState([])
+  const [allTasks, setAllTasks] = useState([]);
+  const [searched, setSearched] = useState(false);
+  const [searchValue, setSearchValue] = useState("".toLowerCase());
 
   // This will help to rerender the tasks again
-  const [modified, setModified] = useState(false)
+  const [modified, setModified] = useState(false);
 
   // Get User
   const getUser = async () => {
@@ -90,52 +92,74 @@ export default function Home() {
 
   // Get tasks
   const getTasks = (titleId) => {
-    setCurrTitleId(titleId)
-    setAllTasks([])
-    console.log("running")
-    const title = user.title.find((item) => item._id === titleId);
+    setAllTasks([]);
+    // console.log("running");
+    const title = user.title.find((item) => item._id === (titleId ? titleId : currTitleId));
     setTitle(title);
-    
-    title.tasks.map((item, index) => {
-      setAllTasks(oldArray => [...oldArray, {task: item, index}])
-    })
 
-    console.log(allTasks)
+    // If searched is true then only task which contains the alphabet that will be shown in the tasks
+    if(searched) {
+      title.tasks.map((item, index) => {
+        item = item.toLowerCase();
+        if(item.includes(searchValue.toLowerCase())) {
+          setAllTasks((oldArray) => [...oldArray, { task: item, index }]);
+        }
+      })
+    //  console.log(searchValue)
+      setSearched(false)
+    } else { 
+      setCurrTitleId(titleId);
+      title.tasks.map((item, index) => {
+        setAllTasks((oldArray) => [...oldArray, { task: item, index }]);
+      });
+    }
+
+    console.log(allTasks);
   };
 
   // Add Task
   const addTask = async (task, setTask) => {
-    const resp = await axios.put(
-      `http://localhost:4000/addTask/${user._id}/${currTitleId}`,
-      { task }
-    );
-    console.log(resp);
-    setTask("")
-    setModified(true)
+    try {
+      const resp = await axios.put(
+        `http://localhost:4000/addTask/${user._id}/${currTitleId}`,
+        { task }
+      );
+      console.log(resp);
+      setTask("");
+      setModified(true);
+    } catch (error) {
+      alert("Select title to add task")
+      console.log(error)
+    }
   };
 
   // Delete Task
   const deleteTask = async (key) => {
-    try{
-      const resp = await axios.delete(`http://localhost:4000/deleteTask/${user._id}/${currTitleId}/${key}`);
-      console.log(resp)
-      setModified(true)
+    try {
+      const resp = await axios.delete(
+        `http://localhost:4000/deleteTask/${user._id}/${currTitleId}/${key}`
+      );
+      console.log(resp);
+      setModified(true);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // Edit task
-  const editTask = async(key, editTaskVal, setEdittaskVal) => {
+  const editTask = async (key, editTaskVal, setEdittaskVal) => {
     try {
-      const resp = await axios.put(`http://localhost:4000/editTask/${user._id}/${currTitleId}/${key}`, {task: editTaskVal})
-      setEdittaskVal("")
-      console.log(resp)      
-      setModified(true)
+      const resp = await axios.put(
+        `http://localhost:4000/editTask/${user._id}/${currTitleId}/${key}`,
+        { task: editTaskVal }
+      );
+      setEdittaskVal("");
+      console.log(resp);
+      setModified(true);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const SidebarProps = {
     user,
@@ -151,16 +175,20 @@ export default function Home() {
     addTask,
     deleteTask,
     editTask,
-    allTasks
+    allTasks,
+    searchValue,
+    setSearchValue,
+    getTasks,
+    setSearched
   };
 
   useEffect(() => {
     getUser();
 
     // if we call addTask function this will repopulate the component
-    if(modified) {
-      getTasks(title._id)
-      setModified(false)
+    if (modified) {
+      getTasks(title._id);
+      setModified(false);
     }
   }, [user]);
 
