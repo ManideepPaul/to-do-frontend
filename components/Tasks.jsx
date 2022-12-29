@@ -72,7 +72,7 @@ const Tasks = (props) => {
       </p>
 
       {/* Add Task Modal */}
-      <div className="mt-5">
+      {title ? <div className="mt-5">
         {/* Modal Button */}
         <label htmlFor="my-modal-3" className="btn">
           Add Task
@@ -131,7 +131,7 @@ const Tasks = (props) => {
             </form>
           </div>
         </div>
-      </div>
+      </div> : ""}
 
       {allTasks.length > 0
         ? allTasks.map((item, key) => {
