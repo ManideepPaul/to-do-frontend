@@ -238,9 +238,9 @@ const Tasks = (props) => {
           })
         : ""}
 
-      <p className="text-xs text-slate-500 text-center">
+      {/* <p className="text-xs text-slate-500 text-center">
         Last updated 12 minutes ago
-      </p>
+      </p> */}
     </div>
   );
 };
