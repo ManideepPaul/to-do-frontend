@@ -90,7 +90,7 @@ const Tasks = (props) => {
             </label>
 
             {/* Add Task */}
-            <form className="mx-auto w-80 mt-8 flex border-2 rounded-md focus-within:ring-2 ">
+            <div className="mx-auto w-80 mt-8 flex border-2 rounded-md focus-within:ring-2 ">
               <input
                 type="text"
                 className="w-10/12 rounded-tl-md rounded-bl-md px-2 py-3 text-sm bg-secondary-content focus:outline-none"
@@ -101,14 +101,11 @@ const Tasks = (props) => {
               <label
                 htmlFor="my-modal-3"
                 className=" mx-auto rounded-tr-md rounded-br-md px-2 pt-3 md:block"
+                onClick={(e) => {
+                  e.preventDefault();
+                  addTask(task, setTask);
+                }}
               >
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    addTask(task, setTask);
-                  }}
-                  type="submit"
-                >
                   {/* + svg */}
                   <svg
                     className="w-6 h-5 fill-current"
@@ -126,9 +123,8 @@ const Tasks = (props) => {
                       d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
                     />
                   </svg>
-                </button>
               </label>
-            </form>
+            </div>
           </div>
         </div>
       </div> : ""}
