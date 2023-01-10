@@ -13,9 +13,9 @@ export default function Login() {
     const userDetail = async () => {
         try {
             const data = { email, password }
-            const user = await axios.post('http://localhost:4000/login', data, 
+            const user = await axios.post('https://to-do-backend-production.up.railway.app/login', data, 
             { withCredentials: true })
-            // console.log(user.data)
+            console.log(user.data)
             const userData = user.data
 
             if(userData.success) {
