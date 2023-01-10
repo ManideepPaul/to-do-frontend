@@ -19,7 +19,7 @@ export default function Home() {
   // Get User
   const getUser = async () => {
     try {
-      const user = await axios.get("https://to-do-backend-production.up.railway.app/findUser", {
+      const user = await axios.get("http://localhost:4000/findUser", {
         withCredentials: true,
       });
 
@@ -27,14 +27,14 @@ export default function Home() {
       setUser(userData);
     } catch (error) {
       router.push("/page/login");
-      console.log(error, "here");
+      console.log(error);
     }
   };
 
   // Logout User
   const logout = async () => {
     try {
-      const resp = await axios.get("https://to-do-backend-production.up.railway.app/logout", {
+      const resp = await axios.get("http://localhost:4000/logout", {
         withCredentials: true,
       });
 
@@ -52,7 +52,7 @@ export default function Home() {
     if (title) {
       try {
         const resp = await axios.put(
-          `https://to-do-backend-production.up.railway.app/addTitle/${user._id}`,
+          `http://localhost:4000/addTitle/${user._id}`,
           { title }
         );
 
@@ -68,7 +68,7 @@ export default function Home() {
   const deleteTitle = async (titleId) => {
     try {
       const resp = await axios.delete(
-        `https://to-do-backend-production.up.railway.app/deleteTitle/${user._id}/${titleId}`
+        `http://localhost:4000/deleteTitle/${user._id}/${titleId}`
       );
       console.log(resp);
     } catch (error) {
@@ -80,7 +80,7 @@ export default function Home() {
   const editTitle = async (titleId, editVal, setEditVal) => {
     try {
       const resp = await axios.put(
-        `https://to-do-backend-production.up.railway.app/editTitle/${user._id}/${titleId}`,
+        `http://localhost:4000/editTitle/${user._id}/${titleId}`,
         { titleName: editVal }
       );
       setEditVal("");
@@ -121,7 +121,7 @@ export default function Home() {
   const addTask = async (task, setTask) => {
     try {
       const resp = await axios.put(
-        `https://to-do-backend-production.up.railway.app/addTask/${user._id}/${currTitleId}`,
+        `http://localhost:4000/addTask/${user._id}/${currTitleId}`,
         { task }
       );
       console.log(resp);
@@ -137,7 +137,7 @@ export default function Home() {
   const deleteTask = async (key) => {
     try {
       const resp = await axios.delete(
-        `https://to-do-backend-production.up.railway.app/deleteTask/${user._id}/${currTitleId}/${key}`
+        `http://localhost:4000/deleteTask/${user._id}/${currTitleId}/${key}`
       );
       console.log(resp);
       setModified(true);
@@ -150,7 +150,7 @@ export default function Home() {
   const editTask = async (key, editTaskVal, setEdittaskVal) => {
     try {
       const resp = await axios.put(
-        `https://to-do-backend-production.up.railway.app/editTask/${user._id}/${currTitleId}/${key}`,
+        `http://localhost:4000/editTask/${user._id}/${currTitleId}/${key}`,
         { task: editTaskVal }
       );
       setEdittaskVal("");

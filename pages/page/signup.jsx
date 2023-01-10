@@ -14,7 +14,7 @@ export default function SignUp() {
     const createUser = async () => {
         try {
             const data = { name, email, password }
-            const addUser = await axios.post('https://to-do-backend-production.up.railway.app/createUser', data)
+            const addUser = await axios.post('http://localhost:4000/createUser', data)
             const checkNewUser = addUser.data
             setName('')
             setEmail('')
